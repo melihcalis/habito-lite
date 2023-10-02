@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+
+<div class="container" style="text-align: center;">
+  <h2>{{habit.name}}</h2>
+  <hr>
+  
+<img src="{% static 'images/olusturan.png' %}" style="display: block; width: auto; height: 100px; margin: 0 auto; "><a href="{% url 'profile' habit.creator.id %}">{{ habit.creator }}</a>
+<hr>
+{% if current_user == habit.creator %}
+<img src="{% static 'images/duzenle.png' %}" style="display: block; width: auto; height: 100px; margin: 0 auto; ">
+<br>
+          <form method="POST" action="{% url 'degistir' 'some_name' habit.id %}">
+              {% csrf_token %}
+              <input type="text" name="name" placeholder="Yeni isim" />
+              <button type="submit">Değiştir</button>
+          </form>
+        <br>
+          <form method="POST" action="{% url 'sil' habit.id %}">
+              {% csrf_token %}
+              <button type="submit">alışkanlığı sil</button>
+          </form>
+  {% else %}
+          <form method="POST" action="{% url 'katil' habit.id %}">
+            {% csrf_token %}
+            <button type="submit">katıl</button>
+          </form>
+          <br>
+          <form method="POST" action="{% url 'ayril' habit.id %}">
+            {% csrf_token %}
+            <button type="submit">ayrıl</button>
+          </form>
+          
+          {% if current_user.is_superuser %}
+          <br>
+          <form method="POST" action="{% url 'sil' habit.id %}">
+            {% csrf_token %}
+            <button type="submit">alışkanlığı sil</button>
+        </form>
+          {% endif %}
+  {% endif %}
+  
+</div>
+
+  
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div style="text-align: center;">
+    <br>
+  <h2>{{ user.username }}</h2>
+  {% if current_user.is_superuser and user.is_superuser == False %}
+  <br>
+          <form method="POST" action="{% url 'kullanici_sil' user.id %}">
+            {% csrf_token %}
+            <button type="submit">kullanıcıyı sil</button>
+        </form>
+        {% endif %}
+  <img src="{% static 'images/aliskanliklari.png' %}" style="display: block; width: auto; height: 100px; margin: 0 auto; ">
+  {% for participation in participations %}
+  {% if participation.participant == user %}
+  <a href="{% url 'habit' participation.habit.id %}">{{ participation.habit.name }}</a><br>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

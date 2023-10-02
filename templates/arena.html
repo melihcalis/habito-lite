@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container" style="margin-top: 25px;">
+    {% for habit in shared_habits_of_user %}
+    
+
+    <table class="table table-bordered border-primary">
+    
+      <thead>
+        <tr>
+          <th scope="row"><a href="{% url 'habit' habit.id %}" style="text-decoration: none; color: inherit;">{{ habit.name }}</a></th>
+          <th scope="col">{{ day_7 }}</th>
+          <th scope="col">{{ day_6 }}</th>
+          <th scope="col">{{ day_5 }}</th>
+          <th scope="col">{{ day_4 }}</th>
+          <th scope="col">{{ day_3 }}</th>
+          <th scope="col">Dün</th>
+          <th scope="col">Bugün</th>
+        </tr>
+      </thead>
+
+    
+      <tbody>
+        
+        {% for participation in participations %}
+        {% if participation.habit == habit %}
+        
+        <tr>
+          <th scope="row" style="vertical-align: middle;">
+            <a href="{% url 'habit' habit.id %}" style="text-decoration: none; color: inherit;">{{ participation.participant.username }}</a>
+        </th>
+            
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == day_7 %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == day_6 %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == day_5 %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == day_4 %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == day_3 %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == yesterday %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+
+            <td style="text-align: center; vertical-align: middle;">
+                {% for log in logs %}
+
+                {% if log.participant == participation.participant and log.habit == participation.habit and log.date == today %}
+                <img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; ">
+                {% endif %}
+
+                {% endfor %}
+            </td>
+
+
+        </tr>
+        
+        
+          {% endif %}
+          {% endfor %}
+      </tbody>
+    
+    </table>
+    
+    {% endfor %}
+    <hr>
+
+    <img src="{% static 'images/diger.png' %}" style="display: block; width: auto; height: 100px; margin: 0 auto; ">
+  <ul style="text-align: center;">
+    {% for user in users %}
+    {% if user != current_user and user.is_superuser == False %}
+
+    <a href="{% url 'profile' user.id %}">{{ user.username }}</a><br>
+    {% endif %}
+    {% endfor %}
+    <hr>
+    <img src="{% static 'images/digerAli.png' %}" style="display: block; width: auto; height: 100px; margin: 0 auto; ">
+  <ul style="text-align: center;">
+    {% for habit in habits %}
+    {% if habit not in shared_habits_of_user and habit not in habits_of_user %}
+
+    <a href="{% url 'habit' habit.id %}">{{ habit.name }}</a> | olusturan: <a href="{% url 'profile' habit.creator.id %}">{{ habit.creator.username }}</a><br> <br>
+
+    {% endif %}
+    {% endfor %}
+  </ul>
+  </div>
+
+  
+
+{% endblock %}

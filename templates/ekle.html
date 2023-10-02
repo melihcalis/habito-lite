@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<br>
+<div style="text-align: center;">
+  <form method="POST" action="{% url 'add_habit' 'some_name' %}">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="İsim" />
+    <button type="submit">Ekle</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <img src="{% static 'images/home.gif' %}" style="display: block; width: 500px; margin: 40px auto;">
+    <img src="{% static 'images/yenihayat.png' %}" style="display: block; margin: 40px auto;">
+    <div style="display: flex; justify-content: center;">
+        <img height="100px" src="{% static 'images/ios.png' %}" style="filter: invert(100%); margin-right: 40px;">
+        <img height="100px" src="{% static 'images/android.png' %}">
+    </div>
+</div>
+
+{% endblock %}

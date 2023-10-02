@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container" style="margin-top: 25px;">
+  <table class="table table-bordered border-primary">
+    <thead>
+      <tr>
+        <th scope="row"><a href="ekle.html"><img src="{% static 'images/aliskanlik.png' %}" style="display: block; width: auto; height: 30px;"></a></th>
+        <th scope="col">{{ day_7 }}</th>
+        <th scope="col">{{ day_6 }}</th>
+        <th scope="col">{{ day_5 }}</th>
+        <th scope="col">{{ day_4 }}</th>
+        <th scope="col">{{ day_3 }}</th>
+        <th scope="col">Dün</th>
+        <th scope="col">Bugün</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for habit in habits_of_user %}
+      {% for participation in participations %}
+      {% if participation.participant == current_user and participation.habit == habit %}
+      
+      <tr>
+        <th scope="row" style="vertical-align: middle;">
+          <a href="{% url 'habit' habit.id %}" style="text-decoration: none; color: inherit;">{{ habit.name }}</a>
+      </th>
+        
+      
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in day_7_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 6 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 6 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in day_6_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 5 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 5 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in day_5_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 4 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 4 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in day_4_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 3 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 3 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in day_3_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 2 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 2 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in yesterday_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 1 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 1 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+        <td style="text-align: center; vertical-align: middle;">
+          {% if habit in today_habits %}
+          <form method="POST" action="{% url 'habit_done' habit.id 0 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/nike.png' %}" style="display: block; width: auto; height: 60px; margin: 0 auto; "></button>
+          </form>
+          {% else %}
+          <form method="POST" action="{% url 'habit_done' habit.id 0 %}" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; padding: 0;"><img src="{% static 'images/notdone.png' %}" style="display: block; width: auto; height: 30px; margin: 0 auto; "></button>
+          </form>
+          {% endif %}
+        </td>
+
+      </tr>
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
