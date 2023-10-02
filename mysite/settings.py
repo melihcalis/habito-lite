@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +85,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    "static"
+    os.path.join(BASE_DIR, 'static'),  # Example directory where your custom static files are located
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
