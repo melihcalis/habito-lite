@@ -83,8 +83,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = '/home/habito.pythonanywhere.com/'
-#STATICFILES_DIRS = [
-#    BASE_DIR / "static"
-#]
+STATICFILES_DIRS = [
+    "static"
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
